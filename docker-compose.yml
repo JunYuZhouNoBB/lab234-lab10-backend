@@ -4,7 +4,7 @@ services:
     image: junyuzhou/se234-lab10-backend:latest
     ports:
       - "8082:8080"
-    frontend:
+  frontend:
     image: junyuzhou/se234-lab10-client:latest
     ports:
       - "8081:80"
