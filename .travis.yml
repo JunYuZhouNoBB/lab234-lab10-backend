@@ -9,14 +9,13 @@ install:
 - mvn clean
 - mvn install -Dmaven.javadoc.skip=true -B -V
 - ls -l
-- docker build --build-arg JAR_FILE=/target/app.jar -t $DOCKER_USERNAME/se234-lab10-backend
-- docker push junyuzhou/se234-lab10-backend
-- docker pull junyuzhou/se23_lab10-client
+- docker build --build-arg JAR_FILE=./target/app.jar -t $DOCKER_USERNAME/se234-lab10-backend  .
+- docker push  $DOCKER_USERNAME/se234-lab10-backend
+- docker pull  $DOCKER_USERNAME/se234-lab10-client
 script:
-- docker-compose -H "$DOCKER_HOST" up -d
-cache:
-  directories:
-  - "$HOME/.m2"
+- docker-compose -H $DOCKER_HOST up -d
+after_success:
+- docker ps
 env:
   global:
   - secure: qnM0LMg80zMHRS84hE5/94O7Un1v8xotyAFMRrMbkEKKv2ZJPIB1MWc/z8c9LZYVibfigaHQvL7fz4L7a/1KeZl2BNrCT1i8iSRnurvtwf9W8kZBahrFRoGfTrfAL5an0N8Fop4/N9Ac1pfSEqSqErGs+70pCvOLCazxq/rvFcoOVsVm6QnSVcTEEGf67Ao1FGCbVGZtQLd7iSItKdRj0YzVQXWJ+ypoEdx6o5oXaifTBV+OtULzERmHYajq4UVusyxiwoiQ3YxFqoYprCw7dKCfBf5aCqZwSiTzkCkqG/vtArltX7ChQ/KJ109WFU2nxxmwn7CCvdyEAAkaMPQVYImA6okK/NeVehnr312WK2dMVHaEmtegLvXlAuIfZadUWbXUb0LqDQYBMhc/Qcj0zzdVoXUl1QINTyskM6KW9OqW1UvNbdM7lP0+5kk8uxrxk1K+XDU2zXeUYVXCCR9kgfdbUqd6ncby9JzjHWA+D6slomHrRt+WD+Xu4NPZY97JIIhTy3aTnFNHY2CZ2Ws3CYC6s1jxLMcGyZj1prCCY8yYzpDMKmzE533lFWVKonzhidracMgXZ3pFOmnlA7EVuiQ+ivsI5xGUodmVBCa7t0M9A5YSV6T7oTNgwGxmYz5pM/xY9eL2QZsUz+PRBy1mqcQmyvi7tTuvgm6fLtE3kIM=
